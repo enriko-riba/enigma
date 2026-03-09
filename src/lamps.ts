@@ -1,3 +1,5 @@
+import { assetUrl } from './assets.ts'
+
 const SVG_NAMESPACE = 'http://www.w3.org/2000/svg'
 const LAMPBOARD_IMAGE_WIDTH = 1269
 const LAMPBOARD_IMAGE_HEIGHT = 482
@@ -160,7 +162,7 @@ export function setupLampboard(options: SetupLampboardOptions): LampboardControl
 	const lampImage = document.createElement('img')
 	lampImage.className = 'lampboard-image'
 	lampImage.alt = 'Enigma lamps'
-	lampImage.src = options.imageSrc ?? '/lamps.png'
+	lampImage.src = options.imageSrc ?? assetUrl('lamps.png')
 
 	lampboardElement.append(lampUnderlay, lampImage)
 	options.host.replaceChildren(lampboardElement)

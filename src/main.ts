@@ -1,4 +1,5 @@
 import './style.css'
+import { assetUrl } from './assets.ts'
 import { setupLampboard } from './lamps.ts'
 import { setupRotors } from './rotors.ts'
 import {
@@ -11,11 +12,11 @@ import { getUiLabels, type LanguageCode, type UiLabels } from './i18n.ts'
 
 type RotorLabelKey = keyof UiLabels['rotorLabels']
 const LANGUAGE_STORAGE_KEY = 'enigma.language'
-const KEY_SOUND_SRC = '/key.wav'
+const KEY_SOUND_SRC = assetUrl('key.wav')
 const KEY_SOUND_POOL_SIZE = 4
 const LANGUAGE_TRACKS: Record<LanguageCode, string> = {
-  en: '/cliffs.mp3',
-  de: '/lili.mp3',
+  en: assetUrl('cliffs.mp3'),
+  de: assetUrl('lili.mp3'),
 }
 
 let currentLanguage: LanguageCode = getInitialLanguage()
@@ -24,16 +25,21 @@ let pendingLanguageTrackListenersAttached = false
 
 const labels = () => getUiLabels(currentLanguage)
 
+document.documentElement.style.setProperty(
+  '--site-background-image',
+  `url("${assetUrl('enigmacode.jpg')}")`,
+)
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="panel">
     <header class="top-bar">
       <h1 id="appTitle" class="app-title"></h1>
       <div id="languagePicker" class="language-picker">
         <button id="languageEnglishButton" class="language-button" type="button">
-          <img src="/British.png" alt="English"></img>
+          <img src="${assetUrl('British.png')}" alt="English"></img>
         </button>
         <button id="languageGermanButton" class="language-button" type="button">
-          <img src="/German.png" alt="German"></img>
+          <img src="${assetUrl('German.png')}" alt="German"></img>
         </button>
       </div>
     </header>
@@ -265,12 +271,12 @@ setupLanguagePicker(languageEnglishButton, languageGermanButton)
 
 const lampboard = setupLampboard({
   host: lampboardHost,
-  imageSrc: '/lamps.png',
+  imageSrc: assetUrl('lamps.png'),
 })
 
 const rotors = setupRotors({
   host: rotorsHost,
-  imageSrc: '/rotors.png',
+  imageSrc: assetUrl('rotors.png'),
   imageAlt: labels().rotorImageAlt,
 })
 

@@ -1,3 +1,5 @@
+import { assetUrl } from './assets.ts'
+
 const SVG_NAMESPACE = 'http://www.w3.org/2000/svg'
 const ROTOR_IMAGE_WIDTH = 411
 const ROTOR_IMAGE_HEIGHT = 252
@@ -123,7 +125,7 @@ export function setupRotors(options: SetupRotorsOptions): RotorsController {
 
 	const rotorImage = document.createElement('img')
 	rotorImage.className = 'rotors-image'
-	rotorImage.src = options.imageSrc ?? '/rotors.png'
+	rotorImage.src = options.imageSrc ?? assetUrl('rotors.png')
 	rotorImage.alt = options.imageAlt ?? DEFAULT_IMAGE_ALT
 
 	rotorsElement.append(underlay, rotorImage)
